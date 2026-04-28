@@ -36,37 +36,39 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
   return (
     <>
       <nav 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          scrolled ? 'bg-white/80 backdrop-blur-md border-b border-brand-charcoal/5 py-4' : 'bg-transparent py-8'
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 border-b border-brand-charcoal/5 ${
+          scrolled 
+            ? 'bg-brand-offwhite/95 md:bg-brand-offwhite backdrop-blur-md md:backdrop-blur-none py-5 shadow-sm' 
+            : 'bg-brand-offwhite py-8'
         }`}
       >
         <div className="max-w-[1800px] mx-auto px-6 md:px-10 flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <button 
               onClick={() => setIsMenuOpen(true)}
-              className={`hover:opacity-50 transition-opacity ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}
+              className="hover:opacity-50 transition-opacity text-brand-charcoal"
             >
               <Menu size={20} strokeWidth={1.5} />
             </button>
           </div>
 
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <h1 className={`text-xl md:text-2xl font-black tracking-tighter transition-all duration-500 uppercase ${scrolled ? 'scale-90 text-brand-charcoal' : 'scale-100 text-white'}`}>
-              Bridexx <span className={`${scrolled ? 'text-brand-grey' : 'text-white/60'} font-light`}>Planet</span>
+            <h1 className={`text-xl md:text-2xl font-black tracking-tighter transition-all duration-700 uppercase ${scrolled ? 'scale-90' : 'scale-100'} text-brand-charcoal`}>
+              Bridexx <span className="text-brand-grey font-light transition-colors duration-700">Planet</span>
             </h1>
           </Link>
 
           <div className="flex items-center space-x-6">
-            <button className={`hidden md:block hover:opacity-50 transition-opacity ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}>
+            <button className="hidden md:block hover:opacity-50 transition-opacity text-brand-charcoal">
               <Search size={20} strokeWidth={1.5} />
             </button>
             <button 
               onClick={onCartClick}
-              className={`hover:opacity-50 transition-opacity relative ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}
+              className="hover:opacity-50 transition-opacity relative text-brand-charcoal"
             >
               <ShoppingBag size={20} strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className={`absolute -top-1 -right-1 w-4 h-4 text-[7px] flex items-center justify-center rounded-full font-black ${scrolled ? 'bg-brand-charcoal text-white' : 'bg-white text-brand-charcoal'}`}>
+                <span className="absolute -top-1 -right-1 w-4 h-4 text-[7px] flex items-center justify-center rounded-full font-black bg-brand-charcoal text-white">
                   {cartCount}
                 </span>
               )}
