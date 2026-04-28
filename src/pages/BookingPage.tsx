@@ -50,17 +50,26 @@ const BookingPage = () => {
   }
 
   return (
-    <div className="py-16 md:py-24 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
-      <div className="text-center mb-12 md:mb-16">
+    <div className="py-24 md:py-40 px-6 md:px-12 lg:px-16 max-w-7xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-20 md:mb-28"
+      >
         <span className="text-brand-rose uppercase tracking-[0.4em] text-[10px] font-black mb-4 block">Consultation</span>
-        <h1 className="text-4xl md:text-6xl font-serif text-brand-charcoal mb-4 italic leading-tight">Book Your Consultation</h1>
-        <p className="text-brand-charcoal/40 tracking-[0.2em] uppercase text-[10px] italic font-medium">Take the first step toward your dream look.</p>
-      </div>
+        <h1 className="text-5xl md:text-8xl font-sans font-bold text-brand-charcoal mb-4 leading-none tracking-tight">Reserve <br className="hidden md:block" /> <span className="text-brand-charcoal/40 font-light italic">Your Slot</span></h1>
+        <p className="text-brand-charcoal/40 tracking-[0.4em] uppercase text-[10px] italic font-black mt-8">Take the first step toward your dream look.</p>
+      </motion.div>
 
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* Booking Form */}
-        <div className="flex-grow">
-          <form onSubmit={handleSubmit} className="bg-white p-8 md:p-16 shadow-2xl border border-brand-rose/10 space-y-10 md:space-y-12 rounded-3xl">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex-grow"
+        >
+          <form onSubmit={handleSubmit} className="bg-white p-10 md:p-20 shadow-[0_40px_100px_rgba(0,0,0,0.04)] border border-brand-charcoal/5 space-y-12 md:space-y-16 rounded-[2.5rem] md:rounded-[3.5rem]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               <div className="space-y-4">
                 <label className="block text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/40">Full Name</label>
@@ -149,7 +158,7 @@ const BookingPage = () => {
               Confirm Consultation
             </button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Sidebar Panel */}
         <aside className="lg:w-96 space-y-8 md:space-y-12 text-center lg:text-left">

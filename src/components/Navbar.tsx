@@ -3,7 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, Search, User, ShoppingBag, X, Instagram, Facebook, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const Navbar = () => {
+interface NavbarProps {
+  cartCount: number;
+  onCartClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -55,9 +60,16 @@ const Navbar = () => {
             <button className={`hidden md:block hover:opacity-50 transition-opacity ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}>
               <Search size={20} strokeWidth={1.5} />
             </button>
-            <button className={`hover:opacity-50 transition-opacity relative ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}>
+            <button 
+              onClick={onCartClick}
+              className={`hover:opacity-50 transition-opacity relative ${scrolled ? 'text-brand-charcoal' : 'text-white'}`}
+            >
               <ShoppingBag size={20} strokeWidth={1.5} />
-              <span className={`absolute -top-1 -right-1 w-3 h-3 text-[7px] flex items-center justify-center rounded-full ${scrolled ? 'bg-brand-charcoal text-white' : 'bg-white text-brand-charcoal'}`}>0</span>
+              {cartCount > 0 && (
+                <span className={`absolute -top-1 -right-1 w-4 h-4 text-[7px] flex items-center justify-center rounded-full font-black ${scrolled ? 'bg-brand-charcoal text-white' : 'bg-white text-brand-charcoal'}`}>
+                  {cartCount}
+                </span>
+              )}
             </button>
           </div>
         </div>

@@ -61,6 +61,10 @@ const PricingPage = () => {
         {tiers.map((tier, i) => (
           <motion.div
             key={`tier-${tier.name}-${i}`}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: i * 0.1 }}
             whileHover={{ y: -8 }}
             className={`flex flex-col h-full rounded-2xl md:rounded-3xl shadow-sm p-8 md:p-12 border transition-all relative overflow-hidden ${
               tier.highlight 

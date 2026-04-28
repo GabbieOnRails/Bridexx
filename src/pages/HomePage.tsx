@@ -152,76 +152,94 @@ const HomePage = () => {
       </section>
       
       {/* QUICK LINK CARDS SECTION */}
-      <section className="py-24 bg-[#F8F8F8] border-b border-brand-charcoal/5 px-6 md:px-12 lg:px-16 w-full">
+      <section className="py-32 bg-[#F8F8F8] border-b border-brand-charcoal/5 px-6 md:px-12 lg:px-16 w-full">
         <div className="w-full">
-          <div className="mb-20 max-w-4xl">
-             <span className="inline-block px-4 py-1.5 bg-white rounded-full text-brand-charcoal text-[10px] uppercase tracking-[0.2em] font-sans font-bold shadow-sm mb-6">Services</span>
-             <h2 className="text-brand-charcoal text-5xl md:text-7xl font-sans font-bold tracking-tight leading-[1.1]">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="mb-24 max-w-4xl"
+          >
+             <span className="inline-block px-4 py-1.5 bg-white rounded-full text-brand-charcoal text-[10px] uppercase tracking-[0.2em] font-sans font-bold shadow-sm mb-8">Services</span>
+             <h2 className="text-brand-charcoal text-5xl md:text-8xl font-sans font-bold tracking-tight leading-[1] md:leading-[0.95]">
                 Start Your <br />
                 <span className="text-brand-charcoal/40 font-light">Bridal Journey!</span>
              </h2>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {/* Card 1 */}
-            <Link to="/book-consultation" className="group bg-white p-10 md:p-12 rounded-[2.5rem] md:rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-700 relative flex flex-col justify-between h-[400px] overflow-hidden">
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-12">
-                  <span className="text-6xl md:text-7xl font-sans font-bold text-brand-charcoal/10 group-hover:text-brand-charcoal/20 transition-colors duration-500">01</span>
-                  <motion.div 
-                    whileHover={{ rotate: 15 }}
-                    className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4"
-                  >
-                    <CalendarCheck size={80} strokeWidth={1} />
-                  </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <Link to="/book-consultation" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-14">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">01</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                      <CalendarCheck size={80} strokeWidth={1} />
+                    </div>
+                  </div>
+                  <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Book a Consultation</h3>
+                  <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Schedule a one-on-one session with our expert stylists to find your dream gown.</p>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Book a Consultation</h3>
-                <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px]">Schedule a one-on-one session with our expert stylists to find your dream gown.</p>
-              </div>
-              <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
-                Book Now <ArrowRight size={16} />
-              </div>
-            </Link>
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                  Book Now <ArrowRight size={16} />
+                </div>
+              </Link>
+            </motion.div>
 
             {/* Card 2 */}
-            <Link to="/price-guide" className="group bg-white p-10 md:p-12 rounded-[2.5rem] md:rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-700 relative flex flex-col justify-between h-[400px] overflow-hidden">
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-12">
-                  <span className="text-6xl md:text-7xl font-sans font-bold text-brand-charcoal/10 group-hover:text-brand-charcoal/20 transition-colors duration-500">02</span>
-                  <motion.div 
-                    whileHover={{ rotate: -15 }}
-                    className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4"
-                  >
-                    <Tag size={80} strokeWidth={1} />
-                  </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <Link to="/price-guide" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-14">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">02</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                      <Tag size={80} strokeWidth={1} />
+                    </div>
+                  </div>
+                  <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Price Guide</h3>
+                  <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Explore transparent pricing designed for every unique bridal vision and budget.</p>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Price Guide</h3>
-                <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px]">Explore transparent pricing designed for every unique bridal vision and budget.</p>
-              </div>
-              <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
-                View Prices <ArrowRight size={16} />
-              </div>
-            </Link>
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                  View Prices <ArrowRight size={16} />
+                </div>
+              </Link>
+            </motion.div>
 
             {/* Card 3 */}
-            <Link to="/our-process" className="group bg-white p-10 md:p-12 rounded-[2.5rem] md:rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-700 relative flex flex-col justify-between h-[400px] overflow-hidden">
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-12">
-                  <span className="text-6xl md:text-7xl font-sans font-bold text-brand-charcoal/10 group-hover:text-brand-charcoal/20 transition-colors duration-500">03</span>
-                  <motion.div 
-                    whileHover={{ rotate: 10 }}
-                    className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4"
-                  >
-                    <ClipboardList size={80} strokeWidth={1} />
-                  </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <Link to="/our-process" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-14">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">03</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                      <ClipboardList size={80} strokeWidth={1} />
+                    </div>
+                  </div>
+                  <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Our Process</h3>
+                  <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Learn exactly what to expect from your first visit through to the final fitting.</p>
                 </div>
-                <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Our Process</h3>
-                <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px]">Learn exactly what to expect from your first visit through to the final fitting.</p>
-              </div>
-              <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
-                Learn More <ArrowRight size={16} />
-              </div>
-            </Link>
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                  Learn More <ArrowRight size={16} />
+                </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -329,16 +347,20 @@ const HomePage = () => {
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-32 bg-white overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-20">
-
-            <h2 className="text-brand-charcoal text-5xl md:text-7xl font-sans font-bold tracking-tight leading-[1.1]">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24"
+          >
+            <h2 className="text-brand-charcoal text-5xl md:text-8xl font-sans font-bold tracking-tight leading-[1] md:leading-[0.95]">
                What Our <br className="md:hidden" />
                <span className="text-brand-charcoal/40 font-light italic">Brides Say</span>
             </h2>
-            <p className="text-brand-charcoal/40 text-xs tracking-[0.2em] uppercase font-bold mt-8">Real stories from real Nigerian brides.</p>
-          </div>
+            <p className="text-brand-charcoal/40 text-[10px] tracking-[0.4em] uppercase font-black mt-8">Real stories from real Nigerian brides.</p>
+          </motion.div>
 
           <div className="relative">
             <div className="overflow-hidden relative rounded-2xl bg-[#F8F8F8] border border-brand-charcoal/5 px-8 md:px-16 pt-12 pb-20">

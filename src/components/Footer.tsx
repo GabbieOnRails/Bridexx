@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="relative overflow-hidden">
       {/* Top Features Section */}
-      <div className="bg-neutral-50 py-20 px-6 md:px-12 shadow-inner shadow-brand-charcoal/5 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+      <div className="bg-[#FAFAFA] py-32 px-6 md:px-12 border-t border-brand-charcoal/5 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
           <div className="flex flex-col items-center text-center group">
             <div className="w-12 h-12 flex items-center justify-center mb-6 text-brand-charcoal hover:scale-110 transition-transform">
               <Scissors size={28} strokeWidth={1} />
