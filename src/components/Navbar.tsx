@@ -111,7 +111,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
               </button>
             </div>
 
-            <div className="flex flex-col gap-8 flex-grow">
+            <div className="flex flex-col gap-8 flex-grow text-[10px]">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={`nav-item-${link.path}`}
@@ -121,7 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
                 >
                   <Link 
                     to={link.path}
-                    className="editorial-heading text-xl md:text-4xl font-bold tracking-tight text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
+                    className="editorial-heading md:text-4xl font-bold tracking-tight text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
                   >
                     {link.name}
                   </Link>

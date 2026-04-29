@@ -68,9 +68,6 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ addToCart }) =>
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="text-[10px] uppercase tracking-[0.4em] font-black text-brand-rose mb-6 block">
-                {product.category}
-              </span>
               <h1 className="text-5xl md:text-7xl font-sans font-bold text-brand-charcoal mb-4 leading-none tracking-tight">
                 {product.name}
               </h1>

@@ -9,12 +9,7 @@ interface ShopPageProps {
 }
 
 const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
-  const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Gowns', 'Traditional', 'Reception', 'Bespoke'];
-
-  const filteredProducts = filter === 'All' 
-    ? products 
-    : products.filter(p => p.category === filter);
+  const filteredProducts = products;
 
   return (
     <div className="bg-brand-offwhite min-h-screen">
@@ -39,31 +34,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Filters */}
-      <section className="sticky top-20 lg:top-24 bg-white/90 backdrop-blur-md z-30 border-b border-brand-charcoal/5 px-6 md:px-12 py-8">
-        <div className="max-w-[1800px] mx-auto flex items-center justify-between">
-          <div className="flex gap-10 overflow-x-auto no-scrollbar pb-2 md:pb-0">
-            {categories.map((cat) => (
-              <button
-                key={`shop-category-${cat}`}
-                onClick={() => setFilter(cat)}
-                className={`text-[10px] uppercase tracking-[0.3em] font-black transition-all whitespace-nowrap relative ${
-                  filter === cat ? 'text-brand-charcoal' : 'text-brand-charcoal/30 hover:text-brand-charcoal/60'
-                }`}
-              >
-                {cat}
-                {filter === cat && (
-                  <motion.div layoutId="activeFilter" className="absolute -bottom-2 left-0 right-0 h-1 bg-brand-charcoal rounded-full" />
-                )}
-              </button>
-            ))}
-          </div>
-          <button className="hidden md:flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-black text-brand-charcoal/40 hover:text-brand-charcoal transition-colors">
-            <Filter size={16} /> Filter & Sort
-          </button>
         </div>
       </section>
 
@@ -119,7 +89,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
 
                   <div className="flex justify-between items-start px-2">
                     <Link to={`/product/${product.id}`} className="flex-grow">
-                      <p className="text-[9px] uppercase tracking-[0.4em] text-brand-rose font-black mb-2">{product.category}</p>
                       <h3 className="text-base font-bold text-brand-charcoal group-hover:text-brand-charcoal/60 transition-colors leading-tight">{product.name}</h3>
                     </Link>
                     <p className="text-base font-black text-brand-charcoal text-right shadow-inner">{product.price}</p>
@@ -128,18 +97,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
               ))}
             </AnimatePresence>
           </div>
-          
-          {filteredProducts.length === 0 && (
-            <div className="py-60 text-center">
-              <p className="text-brand-charcoal/40 italic text-xl">No masterpieces found in this category.</p>
-              <button 
-                onClick={() => setFilter('All')}
-                className="mt-8 text-[10px] uppercase tracking-widest font-black text-brand-charcoal border-b border-brand-charcoal pb-1"
-              >
-                View all looks
-              </button>
-            </div>
-          )}
         </div>
       </section>
 

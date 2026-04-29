@@ -8,7 +8,7 @@ const BookingPage = () => {
     name: '',
     email: '',
     phone: '',
-    weddingDate: '',
+    eventDate: '',
     lookType: 'White Wedding Gown',
     consultationDate: '',
     preferredTime: 'Morning 9am-12pm',
@@ -105,13 +105,13 @@ const BookingPage = () => {
                 />
               </div>
               <div className="space-y-4">
-                <label className="block text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/40">Wedding Date</label>
+                <label className="block text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/40">Event Date</label>
                 <input 
                   required
                   type="date" 
                   className="w-full bg-brand-cream/30 border-b border-brand-rose/20 p-4 focus:outline-none focus:border-brand-rose transition-colors font-serif italic text-lg"
-                  value={formData.weddingDate}
-                  onChange={(e) => setFormData({...formData, weddingDate: e.target.value})}
+                  value={formData.eventDate}
+                  onChange={(e) => setFormData({...formData, eventDate: e.target.value})}
                 />
               </div>
               <div className="space-y-4">
@@ -123,7 +123,7 @@ const BookingPage = () => {
                 >
                   <option>White Wedding Gown</option>
                   <option>Traditional Attire</option>
-                  <option>Both</option>
+                  <option>Prom</option>
                   <option>Other</option>
                 </select>
               </div>
