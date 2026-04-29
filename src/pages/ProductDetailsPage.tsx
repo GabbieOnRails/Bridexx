@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, ChevronLeft, Star, Ruler, Info, ShieldCheck, Heart } from 'lucide-react';
 import { products, Product } from '../constants';
 
@@ -51,12 +51,13 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ addToCart }) =>
                 alt={product.name} 
                 className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" 
               />
-              <button 
+              <motion.button 
+                whileTap={{ scale: 0.9 }}
                 onClick={() => setIsLiked(!isLiked)}
                 className="absolute top-8 right-8 w-14 h-14 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-brand-charcoal hover:bg-brand-rose hover:text-white transition-all shadow-xl"
               >
                 <Heart size={24} className={isLiked ? "fill-current" : ""} />
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
@@ -76,7 +77,7 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ addToCart }) =>
               <div className="flex items-center gap-4 mb-8">
                 <div className="flex text-brand-charcoal">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-current" />
+                    <Star key={`detail-star-${product.id}-${i}`} size={14} className="fill-current" />
                   ))}
                 </div>
                 <span className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/20">Verified Product</span>

@@ -90,25 +90,31 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
                     />
                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     
-                    {/* Hover Actions */}
-                    <div className="absolute top-6 right-6 flex flex-col gap-3 translate-x-16 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-700">
-                      <Link 
-                        to={`/product/${product.id}`}
-                        className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all shadow-xl"
+                    {/* Actions - Always visible on mobile, hover on desktop */}
+                    <div className="absolute top-6 right-6 flex flex-col gap-3 lg:translate-x-16 lg:opacity-0 lg:group-hover:translate-x-0 lg:group-hover:opacity-100 transition-all duration-700">
+                      <motion.div whileTap={{ scale: 0.9 }}>
+                        <Link 
+                          to={`/product/${product.id}`}
+                          className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-charcoal hover:bg-brand-charcoal hover:text-white transition-all shadow-xl"
+                        >
+                          <Eye size={18} />
+                        </Link>
+                      </motion.div>
+                      <motion.button 
+                        whileTap={{ scale: 0.9 }}
+                        className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-charcoal hover:bg-brand-rose hover:text-white transition-all shadow-xl"
                       >
-                        <Eye size={18} />
-                      </Link>
-                      <button className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-charcoal hover:bg-brand-rose hover:text-white transition-all shadow-xl">
                         <Heart size={18} />
-                      </button>
+                      </motion.button>
                     </div>
 
-                    <button 
+                    <motion.button 
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => addToCart(product)}
-                      className="absolute bottom-6 left-6 right-6 py-5 bg-white/95 backdrop-blur-md text-brand-charcoal text-[10px] uppercase tracking-[0.2em] font-black translate-y-24 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 hover:bg-brand-charcoal hover:text-white rounded-2xl flex items-center justify-center gap-2 shadow-2xl"
+                      className="absolute bottom-6 left-6 right-6 py-5 bg-white/95 backdrop-blur-md text-brand-charcoal text-[10px] uppercase tracking-[0.2em] font-black lg:translate-y-24 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 transition-all duration-700 hover:bg-brand-charcoal hover:text-white rounded-2xl flex items-center justify-center gap-2 shadow-2xl"
                     >
                       <ShoppingBag size={14} /> Add to Bag
-                    </button>
+                    </motion.button>
                   </div>
 
                   <div className="flex justify-between items-start px-2">

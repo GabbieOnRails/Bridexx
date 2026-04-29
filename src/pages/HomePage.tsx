@@ -140,12 +140,13 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Link 
               to="/shop"
               className="px-12 py-4 bg-transparent border border-white text-white text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-brand-charcoal transition-all duration-500 rounded-sm flex items-center gap-3 group"
             >
-              Explore Collection <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              Explore Collection <ArrowRight size={16} className="lg:group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </div>
@@ -175,19 +176,20 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
+              whileTap={{ scale: 0.98 }}
             >
               <Link to="/book-consultation" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-14">
-                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">01</span>
-                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">01</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
                       <CalendarCheck size={80} strokeWidth={1} />
                     </div>
                   </div>
                   <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Book a Consultation</h3>
                   <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Schedule a one-on-one session with our expert stylists to find your dream gown.</p>
                 </div>
-                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 lg:group-hover:gap-4 transition-all duration-300">
                   Book Now <ArrowRight size={16} />
                 </div>
               </Link>
@@ -199,19 +201,20 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
+              whileTap={{ scale: 0.98 }}
             >
               <Link to="/price-guide" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-14">
-                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">02</span>
-                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">02</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
                       <Tag size={80} strokeWidth={1} />
                     </div>
                   </div>
                   <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Price Guide</h3>
                   <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Explore transparent pricing designed for every unique bridal vision and budget.</p>
                 </div>
-                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 lg:group-hover:gap-4 transition-all duration-300">
                   View Prices <ArrowRight size={16} />
                 </div>
               </Link>
@@ -223,19 +226,20 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Link to="/our-process" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
+              <Link to="/our-process" className="group bg-white p-10 md:p-14 rounded-[3rem) border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-14">
-                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">03</span>
-                    <div className="w-16 h-16 text-brand-charcoal/5 group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
+                    <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">03</span>
+                    <div className="w-16 h-16 text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-all duration-500 absolute -top-4 -right-4">
                       <ClipboardList size={80} strokeWidth={1} />
                     </div>
                   </div>
                   <h3 className="text-3xl font-bold text-brand-charcoal mb-4 tracking-tight">Our Process</h3>
                   <p className="text-brand-charcoal/50 text-base leading-relaxed max-w-[280px] italic">Learn exactly what to expect from your first visit through to the final fitting.</p>
                 </div>
-                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 group-hover:gap-4 transition-all duration-300">
+                <div className="flex items-center gap-2 text-brand-charcoal font-bold text-xs uppercase tracking-widest relative z-10 lg:group-hover:gap-4 transition-all duration-300">
                   Learn More <ArrowRight size={16} />
                 </div>
               </Link>
@@ -375,7 +379,7 @@ const HomePage = () => {
                 >
                   <div className="flex gap-1 mb-6">
                     {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                      <Star key={i} size={12} className="fill-brand-charcoal text-brand-charcoal" />
+                      <Star key={`hero-star-${currentTestimonial}-${i}`} size={12} className="fill-brand-charcoal text-brand-charcoal" />
                     ))}
                   </div>
                   <p className="text-lg md:text-xl text-brand-charcoal/70 italic font-light leading-relaxed mb-8 max-w-2xl">
@@ -450,8 +454,9 @@ const HomePage = () => {
               >
                 {/* Double the images for seamless looping */}
                 {[...instagramImages, ...instagramImages].map((img, i) => (
-                  <a
-                    key={`insta-img-${i}-${img.slice(-10)}`}
+                  <motion.a
+                    key={`insta-slide-${i}-${img.slice(-8)}`}
+                    whileTap={{ scale: 0.95 }}
                     href="https://instagram.com/bridexx.planet"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -462,10 +467,10 @@ const HomePage = () => {
                       alt={`Instagram ${i + 1}`} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110" 
                     />
-                    <div className="absolute inset-0 bg-brand-charcoal/20 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-brand-charcoal/20 lg:opacity-0 lg:group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                        <Instagram className="text-white" size={20} />
                     </div>
-                  </a>
+                  </motion.a>
                 ))}
               </motion.div>
             </div>
