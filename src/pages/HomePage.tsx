@@ -228,7 +228,7 @@ const HomePage = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link to="/our-process" className="group bg-white p-10 md:p-14 rounded-[3rem) border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
+              <Link to="/our-process" className="group bg-white p-10 md:p-14 rounded-[3rem] border border-brand-charcoal/5 shadow-[0_4px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-700 relative flex flex-col justify-between h-[450px] overflow-hidden">
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-14">
                     <span className="text-7xl md:text-8xl font-sans font-bold text-brand-charcoal/5 lg:group-hover:text-brand-charcoal/10 transition-colors duration-500 italic">03</span>
