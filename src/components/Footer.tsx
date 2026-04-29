@@ -54,6 +54,14 @@ const Footer = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
 
+          <div className="flex justify-center mb-20">
+            <img 
+              src="https://i.ibb.co/67tfd9MQ/Bridexx-Logo.png" 
+              alt="Bridexx Planet" 
+              className="h-16 md:h-20 object-contain invert brightness-200"
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-12 mb-20">
             {/* Column 1: About */}
             <div className="space-y-6">
@@ -67,6 +75,7 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-xs font-black uppercase tracking-[0.3em] text-white">Talk</h4>
               <ul className="space-y-4 text-xs font-light text-white/40 italic">
+                <li className="not-italic text-white/60 mb-2">Micrian villa estate 1, Harris drive. Lekki Lagos</li>
                 <li><Link to="/book-consultation" className="hover:text-brand-rose transition-colors">Book a Consultation</Link></li>
                 <li><a href="mailto:hello@bridexxplanet.com" className="hover:text-brand-rose transition-colors">Email us</a></li>
                 <li><a href="tel:+2347000000000" className="hover:text-brand-rose transition-colors">Call us</a></li>

@@ -82,7 +82,7 @@ export default function App() {
                   </div>
                 ) : (
                   cart.map((item, index) => (
-                    <div key={`${item.id}-${index}`} className="flex gap-4 group">
+                    <div key={`cart-item-${item.id}-${index}`} className="flex gap-4 group">
                       <div className="w-24 h-32 bg-neutral-100 rounded-xl overflow-hidden shrink-0">
                         <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       </div>

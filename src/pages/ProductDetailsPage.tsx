@@ -104,7 +104,7 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ addToCart }) =>
                 <div className="flex gap-8 mb-8 overflow-x-auto no-scrollbar">
                   {['description', 'details', 'shipping'].map((tab) => (
                     <button
-                      key={tab}
+                      key={`info-tab-${tab}`}
                       onClick={() => setActiveTab(tab)}
                       className={`text-[10px] uppercase tracking-[0.2em] font-black transition-all whitespace-nowrap pb-2 border-b-2 ${
                         activeTab === tab ? 'border-brand-charcoal text-brand-charcoal' : 'border-transparent text-brand-charcoal/30'

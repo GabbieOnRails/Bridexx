@@ -52,10 +52,12 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             </button>
           </div>
 
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <h1 className={`text-xl md:text-2xl font-black tracking-tighter transition-all duration-700 uppercase ${scrolled ? 'scale-90' : 'scale-100'} text-brand-charcoal`}>
-              Bridexx <span className="text-brand-grey font-light transition-colors duration-700">Planet</span>
-            </h1>
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2 h-full flex items-center">
+            <img 
+              src="https://i.ibb.co/67tfd9MQ/Bridexx-Logo.png" 
+              alt="Bridexx Planet" 
+              className={`transition-all duration-700 h-10 md:h-12 object-contain ${scrolled ? 'scale-90' : 'scale-100'}`}
+            />
           </Link>
 
           <div className="flex items-center space-x-6">
@@ -81,6 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
+            key="nav-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -90,6 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
         )}
         {isMenuOpen && (
           <motion.div 
+            key="nav-drawer"
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
@@ -110,14 +114,14 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             <div className="flex flex-col gap-8 flex-grow">
               {navLinks.map((link, index) => (
                 <motion.div
-                  key={link.path}
+                  key={`nav-item-${link.path}`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link 
                     to={link.path}
-                    className="editorial-heading text-4xl text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
+                    className="editorial-heading text-xl md:text-4xl font-bold tracking-tight text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
                   >
                     {link.name}
                   </Link>
@@ -139,7 +143,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
               </div>
               <div className="pb-4">
                 <p className="text-[10px] text-brand-charcoal/50 leading-relaxed italic">
-                  Lagos, Nigeria<br />
+                  Micrian villa estate 1, Harris drive. Lekki Lagos<br />
                   hello@bridexxplanet.com
                 </p>
               </div>

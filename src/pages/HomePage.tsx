@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 
 const slides = [
   {
-    image: 'https://i.ibb.co/XkMGC8qJ/bridexx-planet-1751702956-3669872848198311952-34446236868.jpg',
+    image: 'https://i.ibb.co/WpRLGrXZ/bridexx-planet-1755326736-3700271314891728724-34446236868.jpg',
     title: 'YOUR FOREVER BEGINS IN STYLE',
   },
   {
@@ -27,7 +27,7 @@ const slides = [
     title: 'YOUR FOREVER BEGINS IN STYLE',
   },
   {
-    image: 'https://i.ibb.co/WpRLGrXZ/bridexx-planet-1755326736-3700271314891728724-34446236868.jpg',
+    image: 'https://i.ibb.co/XkMGC8qJ/bridexx-planet-1751702956-3669872848198311952-34446236868.jpg',
     title: 'YOUR FOREVER BEGINS IN STYLE',
   }
 ];

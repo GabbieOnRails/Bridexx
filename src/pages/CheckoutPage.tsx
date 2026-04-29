@@ -60,7 +60,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
         <div className="flex-grow space-y-12">
           <div className="flex items-center gap-6 mb-12">
             {[1, 2, 3].map((s) => (
-              <React.Fragment key={s}>
+              <React.Fragment key={`checkout-step-${s}`}>
                 <div className={`flex items-center gap-3 ${step >= s ? 'text-brand-charcoal' : 'text-brand-charcoal/20'}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center border text-[10px] font-black ${step >= s ? 'border-brand-charcoal bg-brand-charcoal text-white' : 'border-brand-charcoal/10'}`}>
                     {s}
@@ -125,7 +125,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
                 
                 <div className="space-y-6">
                   {['Credit/Debit Card', 'Bank Transfer', 'Payment on Consultation'].map((method) => (
-                    <label key={method} className="flex items-center justify-between p-6 bg-white border border-brand-charcoal/10 rounded-2xl cursor-pointer hover:border-brand-charcoal transition-all group">
+                    <label key={`payment-method-${method}`} className="flex items-center justify-between p-6 bg-white border border-brand-charcoal/10 rounded-2xl cursor-pointer hover:border-brand-charcoal transition-all group">
                       <div className="flex items-center gap-4">
                         <div className="w-5 h-5 rounded-full border-2 border-brand-charcoal/20 flex items-center justify-center group-hover:border-brand-charcoal transition-all">
                           <div className="w-2 h-2 rounded-full bg-brand-charcoal opacity-0" />
@@ -186,7 +186,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
             
             <div className="space-y-6 max-h-[300px] overflow-y-auto no-scrollbar pr-2">
               {cart.map((item, index) => (
-                <div key={`${item.id}-${index}`} className="flex justify-between items-center gap-4">
+                <div key={`checkout-cart-${item.id}-${index}`} className="flex justify-between items-center gap-4">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-20 bg-neutral-50 rounded-lg overflow-hidden shrink-0 border border-brand-charcoal/5">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />

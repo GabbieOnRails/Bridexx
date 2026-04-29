@@ -54,6 +54,9 @@ const PricingPage = () => {
       <div className="text-center mb-16 md:mb-24">
         <span className="text-brand-rose uppercase tracking-[0.4em] text-[10px] font-black mb-4 block">Investment</span>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-charcoal mb-4 italic leading-tight">Tailored To Your Vision</h1>
+        <p className="text-brand-charcoal/60 text-lg md:text-xl font-light italic max-w-3xl mx-auto mb-8">
+          At Bridexx, every piece is crafted with precision, detail, and intention. Our pricing reflects the level of craftsmanship, fabric quality, and personalization that goes into creating your perfect bridal look.
+        </p>
         <p className="text-brand-charcoal/40 tracking-[0.2em] uppercase text-[10px] italic font-medium">Transparent pricing for premium craftsmanship.</p>
       </div>
 

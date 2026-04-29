@@ -7,38 +7,38 @@ const steps = [
   {
     number: "01",
     icon: <Mail className="text-gold" size={32} />,
-    title: "Initial Contact",
-    description: "Reach out via our booking form, phone, or Instagram DM to schedule your consultation session."
+    title: "Consultation",
+    description: "The journey begins with an intimate conversation. We explore your inspirations, silhouette preferences, and the unique story you want your gown to tell."
   },
   {
     number: "02",
     icon: <MessageCircle className="text-gold" size={32} />,
-    title: "Consultation Session",
-    description: "Meet with our lead stylist in person or virtually. Discuss your vision, inspirations, colors, and budget."
+    title: "Design Development",
+    description: "Translating ideas into art. We curate sketches and source premium fabrics that align with your vision, ensuring every detail reflects your personality."
   },
   {
     number: "03",
     icon: <Pencil className="text-gold" size={32} />,
-    title: "Design & Fabric Selection",
-    description: "We present design concepts and fabric options tailored to your preferences. You approve the final design before we begin."
+    title: "Precision Measurements",
+    description: "The foundation of perfection. We capture detailed anatomical measurements to create a bespoke pattern unique to your body's geometry."
   },
   {
     number: "04",
     icon: <Ruler className="text-gold" size={32} />,
-    title: "Measurements & First Fitting",
-    description: "We take precise measurements. Your outfit begins construction. You come in for your first fitting to check progress."
+    title: "Crafting & Production",
+    description: "Where magic takes form. Our master artisans begin the meticulous process of cutting, sewing, and hand-finishing your masterpiece in our atelier."
   },
   {
     number: "05",
     icon: <Sparkles className="text-gold" size={32} />,
-    title: "Final Adjustments",
-    description: "We make all necessary adjustments based on your feedback to ensure a perfect fit."
+    title: "Fittings & Refinement",
+    description: "Ensuring a second-skin fit. Through structured fitting sessions, we sculpt and refine the garment until it feels like it was born of you."
   },
   {
     number: "06",
     icon: <ShoppingBag className="text-gold" size={32} />,
-    title: "Delivery",
-    description: "Your finished look is delivered to you, ready for your big day. Looking flawless was never this easy."
+    title: "Final Delivery",
+    description: "The moment of revelation. Your finished look is pressed, packaged, and delivered, ready to grace your most defining life moment."
   }
 ];
 
@@ -49,7 +49,9 @@ const ProcessPage = () => {
         <span className="text-brand-rose uppercase tracking-[0.4em] text-[10px] font-black mb-4 block">The Journey</span>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-brand-charcoal mb-6 md:mb-8 italic leading-tight">Mastering Your Perfect Look</h1>
         <p className="text-brand-charcoal/40 tracking-[0.2em] uppercase text-[10px] italic font-medium block mb-8 md:mb-12">A step-by-step guide to your bespoke creation.</p>
-        <p className="text-brand-charcoal/60 leading-relaxed text-lg md:text-xl font-light italic max-w-2xl mx-auto">"From the first sketch to the final stitch, we guide you every step of the way to ensure your bridal journey is as beautiful as your wedding day."</p>
+        <p className="text-brand-charcoal/60 leading-relaxed text-lg md:text-xl font-light italic max-w-2xl mx-auto">
+          Your Bridexx experience is designed to be seamless, personal, and memorable. From your first idea to your final fitting.
+        </p>
       </div>
 
       {/* Timeline Section */}

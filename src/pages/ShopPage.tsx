@@ -48,7 +48,7 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
           <div className="flex gap-10 overflow-x-auto no-scrollbar pb-2 md:pb-0">
             {categories.map((cat) => (
               <button
-                key={cat}
+                key={`shop-category-${cat}`}
                 onClick={() => setFilter(cat)}
                 className={`text-[10px] uppercase tracking-[0.3em] font-black transition-all whitespace-nowrap relative ${
                   filter === cat ? 'text-brand-charcoal' : 'text-brand-charcoal/30 hover:text-brand-charcoal/60'
@@ -74,7 +74,7 @@ const ShopPage: React.FC<ShopPageProps> = ({ addToCart }) => {
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, index) => (
                 <motion.div
-                  key={product.id}
+                  key={`shop-product-${product.id}`}
                   layout
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
