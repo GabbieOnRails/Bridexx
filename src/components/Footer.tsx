@@ -77,9 +77,9 @@ const Footer = () => {
               <ul className="space-y-4 text-xs font-light text-white/40 italic">
                 <li className="not-italic text-white/60 mb-2">Micrian villa estate 1, Harris drive. Lekki Lagos</li>
                 <li><Link to="/book-consultation" className="hover:text-brand-rose transition-colors">Book a Consultation</Link></li>
-                <li><a href="mailto:hello@bridexxplanet.com" className="hover:text-brand-rose transition-colors">Email us</a></li>
-                <li><a href="tel:+2347000000000" className="hover:text-brand-rose transition-colors">Call us</a></li>
-                <li><a href="https://wa.me/2347000000000" className="hover:text-brand-rose transition-colors">Text us on WhatsApp</a></li>
+                <li><a href="mailto:ceo@bridexxplanet.com" className="hover:text-brand-rose transition-colors">Email us</a></li>
+                <li><a href="tel:07036058976" className="hover:text-brand-rose transition-colors">Call us</a></li>
+                <li><a href="https://wa.me/message/SUZYWEGCRSVQO1" className="hover:text-brand-rose transition-colors">Text us on WhatsApp</a></li>
               </ul>
             </div>
 
@@ -99,18 +99,13 @@ const Footer = () => {
               <h4 className="text-xs font-black uppercase tracking-[0.3em] text-white">Stalk</h4>
               <ul className="space-y-4 text-xs font-light text-white/40 italic">
                 <li>
-                  <a href="https://facebook.com" className="flex items-center gap-3 hover:text-brand-rose transition-colors">
+                  <a href="https://www.facebook.com/profile.php?id=100086112667089&mibextid=wwXIfr&mibextid=wwXIfr" className="flex items-center gap-3 hover:text-brand-rose transition-colors">
                     <Facebook size={14} /> Facebook
                   </a>
                 </li>
                 <li>
                   <a href="https://instagram.com/bridexx.planet" className="flex items-center gap-3 hover:text-brand-rose transition-colors">
                     <Instagram size={14} /> Instagram
-                  </a>
-                </li>
-                <li>
-                  <a href="https://tiktok.com" className="flex items-center gap-3 hover:text-brand-rose transition-colors">
-                    <span className="text-[10px] font-bold">TikTok</span>
                   </a>
                 </li>
               </ul>

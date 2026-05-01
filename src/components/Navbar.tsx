@@ -111,7 +111,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
               </button>
             </div>
 
-            <div className="flex flex-col gap-8 flex-grow text-[10px]">
+            <div className="flex flex-col gap-8 flex-grow text-[15px]">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={`nav-item-${link.path}`}
@@ -136,7 +136,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-brand-charcoal/40 hover:text-brand-charcoal transition-colors">
                     <Instagram size={18} />
                   </a>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-brand-charcoal/40 hover:text-brand-charcoal transition-colors">
+                  <a href="https://www.facebook.com/profile.php?id=100086112667089&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-brand-charcoal/40 hover:text-brand-charcoal transition-colors">
                     <Facebook size={18} />
                   </a>
                 </div>
@@ -144,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
               <div className="pb-4">
                 <p className="text-[10px] text-brand-charcoal/50 leading-relaxed italic">
                   Micrian villa estate 1, Harris drive. Lekki Lagos<br />
-                  hello@bridexxplanet.com
+                  ceo@bridexxplanet.com
                 </p>
               </div>
             </div>

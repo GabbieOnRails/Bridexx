@@ -95,10 +95,27 @@ const HomePage = () => {
   const nextLook = () => setActiveLook((prev) => (prev + 1) % looks.length);
   const prevLook = () => setActiveLook((prev) => (prev - 1 + looks.length) % looks.length);
 
+  // Hero Slider
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Our Looks Slider Auto-scroll
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextLook();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Testimonials Slider Auto-scroll
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
@@ -297,9 +314,9 @@ const HomePage = () => {
                   }}
                   transition={{ 
                     type: "spring", 
-                    stiffness: 250, 
-                    damping: 25,
-                    mass: 0.8
+                    stiffness: 150, 
+                    damping: 20,
+                    mass: 1
                   }}
                   className="absolute w-[260px] md:w-[450px] aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] cursor-grab active:cursor-grabbing bg-brand-charcoal"
                   onClick={() => setActiveLook(index)}
@@ -374,7 +391,7 @@ const HomePage = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col items-center text-center"
                 >
                   <div className="flex gap-1 mb-6">

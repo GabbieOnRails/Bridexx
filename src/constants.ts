@@ -19,15 +19,6 @@ export const products: Product[] = [
     description: "A breathtaking A-line gown crafted from premium silk tulle with intricate lace detailing on the bodice. Perfect for a timeless entrance."
   },
   {
-    id: 3,
-    name: "Celestial Tulle Gown",
-    price: "₦1,200,000",
-    priceValue: 1200000,
-    image: "https://i.ibb.co/hJFFd4qR/bridexx-planet-1777011295-3882174028064877310-34446236868.jpg",
-    category: "Exclusive Collection",
-    description: "Light as air and sparking with ethereal charm. A multi-layered tulle masterpiece designed for the bride who wants to shine under the stars."
-  },
-  {
     id: 4,
     name: "The Royal Meridian",
     price: "₦1,000,000",
@@ -57,20 +48,11 @@ export const products: Product[] = [
   {
     id: 7,
     name: "The Eternal Grace",
-    price: "₦1,500,000",
-    priceValue: 1500000,
+    price: "₦2,000,000",
+    priceValue: 2000000,
     image: "https://i.ibb.co/vvq5gSnY/bridexx-planet-1751102901-3664839223543082471-34446236868.jpg",
     category: "Exclusive Collection",
     description: "Minimalist yet bold. A silhouette that defines grace, utilizing Italian crepe and a hand-finished neckline."
-  },
-  {
-    id: 8,
-    name: "Majestic Bloom Gown",
-    price: "₦1,500,000",
-    priceValue: 1500000,
-    image: "https://i.ibb.co/0V1w35QL/bridexx-planet-1777011295-3882174121455239540-34446236868.jpg",
-    category: "Exclusive Collection",
-    description: "A floral-inspired reception gown with 3D applique work and a delicate sweetheart neckline. Modern romance at its finest."
   },
   {
     id: 9,
@@ -102,8 +84,8 @@ export const products: Product[] = [
   {
     id: 12,
     name: "The Royal Radiance",
-    price: "₦1,500,000",
-    priceValue: 1500000,
+    price: "₦800,000",
+    priceValue: 800000,
     image: "https://i.ibb.co/VZSxYg5/IMG-1197.jpg",
     category: "Exclusive Collection",
     description: "Our signature luxury gown, utilizing the finest fabrics and months of dedicated hand-sewn detailing."
@@ -128,7 +110,7 @@ export const products: Product[] = [
   },
   {
     id: 15,
-    name: "Divine Heritage Gown",
+    name: "Aso Oke Top and Skirt",
     price: "₦1,000,000",
     priceValue: 1000000,
     image: "https://i.ibb.co/d0vQcsGL/IMG-2779.jpg",
@@ -137,7 +119,7 @@ export const products: Product[] = [
   },
   {
     id: 16,
-    name: "The Empress Couture",
+    name: "Whispers of Ivory",
     price: "₦1,800,000",
     priceValue: 1800000,
     image: "https://i.ibb.co/VW6k6MSZ/IMG-3146.jpg",
@@ -146,9 +128,9 @@ export const products: Product[] = [
   },
   {
     id: 17,
-    name: "Chiffon Breeze Gown",
-    price: "₦400,000",
-    priceValue: 400000,
+    name: "Prom Dress",
+    price: "₦800,000",
+    priceValue: 800000,
     image: "https://i.ibb.co/WvNgmspW/IMG-4026.jpg",
     category: "Exclusive Collection",
     description: "Lightweight and spirited, this gown is designed for movement and celebration."
@@ -217,15 +199,6 @@ export const products: Product[] = [
     description: "Bold blue tones and heritage hand-work make this a standout traditional ensemble."
   },
   {
-    id: 25,
-    name: "Minimalist Grace Dress",
-    price: "₦350,000",
-    priceValue: 350000,
-    image: "https://i.ibb.co/jkhzmNtr/IMG-9891.jpg",
-    category: "Exclusive Collection",
-    description: "For the woman who knows that less is more. Perfect tailoring in premium crepe."
-  },
-  {
     id: 26,
     name: "Starlight Glow Gown",
     price: "₦400,000",
@@ -233,5 +206,14 @@ export const products: Product[] = [
     image: "https://i.ibb.co/GQMTPmp0/IMG-9952.jpg",
     category: "Exclusive Collection",
     description: "A dress that captures the light. Featuring a subtle shimmer that comes alive on the dance floor."
+  },
+  {
+    id: 27,
+    name: "Crystal Radiance Gown",
+    price: "₦800,000",
+    priceValue: 800000,
+    image: "https://i.ibb.co/yFyW3Tm9/IMG-1878-1.jpg",
+    category: "Exclusive Collection",
+    description: "A mesmerizing gown that captures the essence of luxury and grace, perfect for the grandest occasions."
   }
 ];
