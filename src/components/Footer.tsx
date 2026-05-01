@@ -64,11 +64,20 @@ const Footer = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-12 mb-20">
             {/* Column 1: About */}
-            <div className="space-y-6">
-              <h4 className="text-xs font-black uppercase tracking-[0.3em] text-white">About the Brand</h4>
-              <p className="text-xs leading-relaxed text-white/40 italic font-light max-w-sm">
-                Founded with a focus on creating smart, elegant, and timeless bridal attire for the modern woman. Bridexx Planet is dedicated to providing bespoke design and handcrafted fits that make every bride feel like royalty.
-              </p>
+            <div className="space-y-10">
+              <div className="space-y-1">
+                <h4 className="text-xl font-light text-white font-serif normal-case tracking-normal">
+                  Crafted by <span className="text-[#C5A267] italic font-medium">Ifedolapo</span>
+                </h4>
+                <div className="text-3xl font-light text-[#C5A267] font-serif italic tracking-tight leading-none">
+                  Olalekan
+                </div>
+              </div>
+              <div className="space-y-6">
+                <p className="text-xs leading-relaxed text-white/50 italic font-light max-w-sm">
+                  Born from a deep love of beauty and precision, Bridexx Planet is where African elegance meets world-class couture. Based in the heart of Lekki, Lagos, every piece is a labour of love — sculpted to make you feel like the most breathtaking version of yourself.
+                </p>
+              </div>
             </div>
 
             {/* Column 2: Talk */}
