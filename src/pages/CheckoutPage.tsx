@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Truck, CreditCard, CheckCircle, ChevronRight, Lock } from 'lucide-react';
 import { Product } from '../constants';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 interface CheckoutPageProps {
   cart: Product[];
@@ -74,43 +75,47 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
 
   const isCustomerComplete = Object.values(customer).every(val => (val as string).trim() !== '');
 
+  const { loginByToken } = useAuth();
+  const navigate = useNavigate();
+
   const handlePayment = async () => {
     setIsProcessing(true);
     
     // Prepare order details
-    const orderData = {
+    const checkoutData = {
       customer,
       measurements,
       order: {
-        id: `LX-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
         items: cart,
         total: total
       }
     };
 
     try {
-      // Send email notification
-      const response = await fetch('/api/send-order-email', {
+      const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify(checkoutData),
       });
 
-      if (!response.ok) {
-        console.error('Failed to send order email');
-      }
+      const data = await response.json();
 
-      setIsProcessing(false);
-      setIsFinished(true);
-      clearCart();
-    } catch (error) {
+      if (response.ok && data.customToken) {
+        // Auto-login using the custom token
+        await loginByToken(data.customToken);
+        
+        setIsProcessing(false);
+        setIsFinished(true);
+        clearCart();
+      } else {
+        throw new Error(data.error || 'Failed to complete checkout');
+      }
+    } catch (error: any) {
       console.error('Error during checkout:', error);
-      // Still finish for demo purposes even if email fails, but in production we might want to handle this better
+      alert(error.message || 'Checkout failed. Please try again.');
       setIsProcessing(false);
-      setIsFinished(true);
-      clearCart();
     }
   };
 
@@ -127,13 +132,13 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
           </div>
           <h2 className="text-4xl md:text-5xl font-sans font-bold text-brand-charcoal mb-6 leading-tight">Order <span className="italic font-light text-brand-charcoal/40">Successful</span></h2>
           <p className="text-brand-charcoal/50 leading-relaxed mb-12 italic text-lg">
-            Your journey with Bridexx Planet has officially begun. An order confirmation has been sent to your email. Our concierge will contact you within 24 hours to discuss fitting details.
+            Your journey with Bridexx Planet has officially begun. You've been automatically signed into your new dashboard.
           </p>
           <Link 
-            to="/" 
+            to="/dashboard" 
             className="inline-block bg-brand-charcoal text-white px-12 py-5 rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-rose transition-all shadow-xl"
           >
-            Return to Atelier
+            Go to Your Dashboard
           </Link>
         </motion.div>
       </div>

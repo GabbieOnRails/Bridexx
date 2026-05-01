@@ -1,0 +1,92 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // --- Validation Helpers ---
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['name', 'email', 'role']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() <= 100 &&
+             data.role in ['user', 'admin'] &&
+             (data.get('phone', '') is string) && (data.get('phone', '').size() <= 30) &&
+             (data.get('address', '') is string) && (data.get('address', '').size() <= 500);
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['userId', 'measurements', 'productPrice', 'productPaymentStatus', 'orderStatus', 'createdAt', 'updatedAt']) &&
+             data.userId == request.auth.uid &&
+             data.productPrice is number && data.productPrice >= 0 &&
+             data.productPaymentStatus in ['pending', 'paid'] &&
+             data.orderStatus in ['payment_confirmed', 'in_progress', 'ready_for_shipping', 'shipped'] &&
+             data.createdAt == request.time &&
+             data.updatedAt == request.time;
+    }
+
+    // --- Matches ---
+
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow create: if isSignedIn() && isOwner(userId) && isValidUser(incoming()) && incoming().role == 'user';
+      allow update: if isOwner(userId) && isValidUser(incoming()) && 
+                    incoming().role == existing().role && // Cannot change role
+                    incoming().diff(existing()).affectedKeys().hasOnly(['name', 'phone', 'address', 'savedMeasurements', 'requiresPasswordReset', 'updatedAt']);
+      allow list: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      // No client-side writes to admins collection
+    }
+
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && (isOwner(existing().userId) || isAdmin());
+      allow list: if isSignedIn() && (isOwner(resource.data.userId) || isAdmin());
+      allow create: if isSignedIn() && isValidOrder(incoming());
+      allow update: if isAdmin() || (
+        isOwner(existing().userId) && 
+        incoming().diff(existing()).affectedKeys().hasOnly(['updatedAt']) // Just an example, maybe users can't update at all
+      );
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /notifications/{notificationId} {
+      allow get, update: if isOwner(existing().userId);
+      allow list: if isOwner(resource.data.userId);
+      allow create: if isAdmin();
+    }
+  }
+}

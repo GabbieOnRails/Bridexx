@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Search, User, ShoppingBag, X, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Menu, Search, User, ShoppingBag, X, Instagram, Facebook, Twitter, LayoutDashboard } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useAuth } from '../contexts/AuthContext';
 
 interface NavbarProps {
   cartCount: number;
@@ -12,6 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { currentUser, userProfile } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,9 +63,13 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
           </Link>
 
           <div className="flex items-center space-x-6">
-            <button className="hidden md:block hover:opacity-50 transition-opacity text-brand-charcoal">
-              <Search size={20} strokeWidth={1.5} />
-            </button>
+            <Link 
+              to={currentUser ? (userProfile?.role === 'admin' ? '/admin' : '/dashboard') : '/login'} 
+              className="hover:opacity-50 transition-opacity text-brand-charcoal flex items-center gap-2"
+            >
+              {currentUser ? <LayoutDashboard size={20} strokeWidth={1.5} /> : <User size={20} strokeWidth={1.5} />}
+              {currentUser && <span className="hidden lg:inline text-[9px] uppercase tracking-widest font-black">Portal</span>}
+            </Link>
             <button 
               onClick={onCartClick}
               className="hover:opacity-50 transition-opacity relative text-brand-charcoal"
@@ -121,15 +127,35 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
                 >
                   <Link 
                     to={link.path}
-                    className="editorial-heading md:text-4xl font-bold tracking-tight text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
+                    className="editorial-heading md:text-3xl font-bold tracking-tight text-brand-charcoal hover:italic hover:pl-4 transition-all duration-300 block"
                   >
                     {link.name}
                   </Link>
                 </motion.div>
               ))}
+
+              {currentUser && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Link 
+                    to={userProfile?.role === 'admin' ? '/admin' : '/dashboard'}
+                    className="editorial-heading md:text-3xl font-bold tracking-tight text-brand-rose hover:italic hover:pl-4 transition-all duration-300 block"
+                  >
+                    {userProfile?.role === 'admin' ? 'Atelier Control' : 'My Dashboard'}
+                  </Link>
+                </motion.div>
+              )}
             </div>
 
             <div className="mt-auto space-y-8 pt-8 border-t border-brand-charcoal/5">
+              {!currentUser && (
+                <Link to="/login" className="block text-[10px] uppercase font-black tracking-[0.2em] bg-neutral-50 p-4 text-center rounded-xl hover:bg-neutral-100 transition-all">
+                  Client sign in
+                </Link>
+              )}
               <div>
                 <h4 className="text-[10px] uppercase font-black tracking-widest text-brand-charcoal/30 mb-4">Connect</h4>
                 <div className="flex gap-6">
@@ -140,12 +166,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
                     <Facebook size={18} />
                   </a>
                 </div>
-              </div>
-              <div className="pb-4">
-                <p className="text-[10px] text-brand-charcoal/50 leading-relaxed italic">
-                  Micrian villa estate 1, Harris drive. Lekki Lagos<br />
-                  ceo@bridexxplanet.com
-                </p>
               </div>
             </div>
           </motion.div>
