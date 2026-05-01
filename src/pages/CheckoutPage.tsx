@@ -14,17 +14,104 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   
-  const subtotal = cart.reduce((acc, item) => acc + item.priceValue, 0);
-  const delivery = 5000;
-  const total = subtotal + delivery;
+  const [customer, setCustomer] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    address: ''
+  });
+  
+  const [measurements, setMeasurements] = useState({
+    fullLength: '',
+    bust: '',
+    waist: '',
+    hip: '',
+    nippleToNipple: '',
+    bustPoint: '',
+    underBust: '',
+    halfLength: '',
+    underBustRound: '',
+    kneeLength: '',
+    shoulder: '',
+    sleeve: '',
+    roundArm: '',
+    roundElbow: '',
+    wrist: '',
+  });
 
-  const handlePayment = () => {
+  const handleMeasurementChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setMeasurements(prev => ({ ...prev, [name]: value }));
+  };
+
+  const [testStatus, setTestStatus] = useState<string | null>(null);
+
+  const testEmailConnection = async () => {
+    setTestStatus('Testing...');
+    try {
+      const response = await fetch('/api/verify-smtp');
+      const data = await response.json();
+      if (response.ok) {
+        setTestStatus('✅ SMTP Ready');
+      } else {
+        setTestStatus(`❌ Error: ${data.message}`);
+      }
+    } catch (error) {
+      setTestStatus('❌ Connection Failed');
+    }
+    setTimeout(() => setTestStatus(null), 5000);
+  };
+
+  const handleCustomerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCustomer(prev => ({ ...prev, [name]: value }));
+  };
+
+  const isMeasurementsComplete = Object.values(measurements).every((val) => (val as string).trim() !== '');
+  
+  const subtotal = cart.reduce((acc, item) => acc + item.priceValue, 0);
+  const total = subtotal;
+
+  const isCustomerComplete = Object.values(customer).every(val => (val as string).trim() !== '');
+
+  const handlePayment = async () => {
     setIsProcessing(true);
-    setTimeout(() => {
+    
+    // Prepare order details
+    const orderData = {
+      customer,
+      measurements,
+      order: {
+        id: `LX-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+        items: cart,
+        total: total
+      }
+    };
+
+    try {
+      // Send email notification
+      const response = await fetch('/api/send-order-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        console.error('Failed to send order email');
+      }
+
       setIsProcessing(false);
       setIsFinished(true);
       clearCart();
-    }, 3000);
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      // Still finish for demo purposes even if email fails, but in production we might want to handle this better
+      setIsProcessing(false);
+      setIsFinished(true);
+      clearCart();
+    }
   };
 
   if (isFinished) {
@@ -59,17 +146,17 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
         {/* Checkout Steps */}
         <div className="flex-grow space-y-12">
           <div className="flex items-center gap-6 mb-12">
-            {[1, 2, 3].map((s) => (
+            {[1, 2, 3, 4].map((s) => (
               <React.Fragment key={`checkout-step-${s}`}>
                 <div className={`flex items-center gap-3 ${step >= s ? 'text-brand-charcoal' : 'text-brand-charcoal/20'}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center border text-[10px] font-black ${step >= s ? 'border-brand-charcoal bg-brand-charcoal text-white' : 'border-brand-charcoal/10'}`}>
                     {s}
                   </div>
                   <span className="text-[10px] uppercase tracking-widest font-black hidden sm:block">
-                    {s === 1 ? 'Shipping' : s === 2 ? 'Payment' : 'Review'}
+                    {s === 1 ? 'Shipping' : s === 2 ? 'Measurements' : s === 3 ? 'Payment' : 'Review'}
                   </span>
                 </div>
-                {s < 3 && <div className={`flex-grow h-px ${step > s ? 'bg-brand-charcoal' : 'bg-brand-charcoal/10'}`} />}
+                {s < 4 && <div className={`flex-grow h-px ${step > s ? 'bg-brand-charcoal' : 'bg-brand-charcoal/10'}`} />}
               </React.Fragment>
             ))}
           </div>
@@ -87,22 +174,55 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40">Full Name</label>
-                    <input type="text" className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" placeholder="Ama Okafor" />
+                    <input 
+                      type="text" 
+                      name="name"
+                      value={customer.name}
+                      onChange={handleCustomerChange}
+                      className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" 
+                      placeholder="Ama Okafor" 
+                    />
                   </div>
                   <div className="space-y-3">
                     <label className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40">Phone Number</label>
-                    <input type="tel" className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" placeholder="+234..." />
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={customer.phone}
+                      onChange={handleCustomerChange}
+                      className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" 
+                      placeholder="+234..." 
+                    />
+                  </div>
+                  <div className="md:col-span-2 space-y-3">
+                    <label className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40">Email Address</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={customer.email}
+                      onChange={handleCustomerChange}
+                      className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" 
+                      placeholder="ama@example.com" 
+                    />
                   </div>
                   <div className="md:col-span-2 space-y-3">
                     <label className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40">Shipping Address</label>
-                    <input type="text" className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" placeholder="Street, City, State" />
+                    <input 
+                      type="text" 
+                      name="address"
+                      value={customer.address}
+                      onChange={handleCustomerChange}
+                      className="w-full bg-white border border-brand-charcoal/10 p-5 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic" 
+                      placeholder="Street, City, State" 
+                    />
                   </div>
                 </div>
                 <button 
+                  disabled={!isCustomerComplete}
                   onClick={() => setStep(2)}
-                  className="w-full md:w-auto px-12 py-5 bg-brand-charcoal text-white rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-rose transition-all flex items-center justify-center gap-3"
+                  className={`w-full md:w-auto px-12 py-5 rounded-xl text-[10px] uppercase tracking-widest font-black transition-all flex items-center justify-center gap-3 ${isCustomerComplete ? 'bg-brand-charcoal text-white hover:bg-brand-rose' : 'bg-brand-charcoal/10 text-brand-charcoal/30 cursor-not-allowed'}`}
                 >
-                  Continue to Payment <ChevronRight size={16} />
+                  Continue to Measurements <ChevronRight size={16} />
                 </button>
               </motion.div>
             )}
@@ -110,6 +230,146 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
             {step === 2 && (
               <motion.div 
                 key="step2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="space-y-12"
+              >
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
+                  <h3 className="text-3xl font-sans font-bold text-brand-charcoal">Atelier Measurements</h3>
+                  <span className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40 italic">Required for Bespoke Fit (Inches or CM)</span>
+                </div>
+                
+                <div className="space-y-12">
+                  {/* Category: Core Silhouette */}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/30">Core Silhouette</h4>
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {[
+                        { label: 'Full Length', name: 'fullLength' },
+                        { label: 'Bust', name: 'bust' },
+                        { label: 'Waist', name: 'waist' },
+                        { label: 'Hip', name: 'hip' },
+                        { label: 'Knee Length', name: 'kneeLength' },
+                      ].map((field) => (
+                        <div key={field.name} className="space-y-2">
+                          <label className="text-[9px] uppercase tracking-widest font-black text-brand-charcoal/40 block">
+                            {field.label}
+                          </label>
+                          <input 
+                            type="text" 
+                            name={field.name}
+                            value={measurements[field.name as keyof typeof measurements]}
+                            onChange={handleMeasurementChange}
+                            className="w-full bg-white border border-brand-charcoal/10 p-4 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic text-sm transition-all" 
+                            placeholder="Value" 
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category: Upper Bodice */}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/30">Upper Bodice</h4>
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {[
+                        { label: 'Shoulder', name: 'shoulder' },
+                        { label: 'Nipple to Nipple', name: 'nippleToNipple' },
+                        { label: 'Bust Point', name: 'bustPoint', sub: '(Shoulder to Nipple)' },
+                        { label: 'Under Bust', name: 'underBust', sub: '(Shoulder to Under)' },
+                        { label: 'Under Bust Round', name: 'underBustRound' },
+                        { label: 'Half Length', name: 'halfLength', sub: '(Shoulder to Waist)' },
+                      ].map((field) => (
+                        <div key={field.name} className="space-y-2">
+                          <label className="text-[9px] uppercase tracking-widest font-black text-brand-charcoal/40 block">
+                            {field.label} {field.sub && <span className="lowercase font-light italic opacity-60 block md:inline">{field.sub}</span>}
+                          </label>
+                          <input 
+                            type="text" 
+                            name={field.name}
+                            value={measurements[field.name as keyof typeof measurements]}
+                            onChange={handleMeasurementChange}
+                            className="w-full bg-white border border-brand-charcoal/10 p-4 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic text-sm transition-all" 
+                            placeholder="Value" 
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category: Sleeves & Arms */}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-black text-brand-charcoal/30">Sleeves & Arms</h4>
+                      <div className="h-px flex-grow bg-brand-charcoal/5" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {[
+                        { label: 'Sleeve', name: 'sleeve' },
+                        { label: 'Round Arm', name: 'roundArm' },
+                        { label: 'Round Elbow', name: 'roundElbow' },
+                        { label: 'Wrist', name: 'wrist' }
+                      ].map((field) => (
+                        <div key={field.name} className="space-y-2">
+                          <label className="text-[9px] uppercase tracking-widest font-black text-brand-charcoal/40 block">
+                            {field.label}
+                          </label>
+                          <input 
+                            type="text" 
+                            name={field.name}
+                            value={measurements[field.name as keyof typeof measurements]}
+                            onChange={handleMeasurementChange}
+                            className="w-full bg-white border border-brand-charcoal/10 p-4 rounded-xl focus:outline-none focus:border-brand-charcoal font-serif italic text-sm transition-all" 
+                            placeholder="Value" 
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center">
+                  <button onClick={() => setStep(1)} className="w-full sm:w-auto px-12 py-5 border border-brand-charcoal/10 text-brand-charcoal rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-charcoal hover:text-white transition-all order-3 sm:order-1">
+                    Back to Shipping
+                  </button>
+                  <button 
+                    disabled={!isMeasurementsComplete}
+                    onClick={() => setStep(3)}
+                    className={`flex-grow w-full sm:w-auto px-12 py-5 rounded-xl text-[10px] uppercase tracking-widest font-black transition-all flex items-center justify-center gap-3 order-1 sm:order-2 ${isMeasurementsComplete ? 'bg-brand-charcoal text-white hover:bg-brand-rose' : 'bg-brand-charcoal/10 text-brand-charcoal/30 cursor-not-allowed'}`}
+                  >
+                    Continue to Payment <ChevronRight size={16} />
+                  </button>
+                  
+                  {/* Dev Tool: SMTP Test */}
+                  <div className="order-2 sm:order-3 w-full sm:w-auto">
+                    <button 
+                      onClick={testEmailConnection}
+                      className="text-[8px] uppercase tracking-widest font-black text-brand-charcoal/30 hover:text-brand-charcoal flex items-center gap-2 mx-auto sm:mx-0"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-rose animate-pulse" />
+                      {testStatus || "Verify SMTP Service"}
+                    </button>
+                  </div>
+                </div>
+                {!isMeasurementsComplete && (
+                  <p className="text-[9px] text-brand-rose italic font-medium text-center md:text-left">Please provide all measurements to ensure the perfect fit for your silhouette.</p>
+                )}
+              </motion.div>
+            )}
+
+            {step === 3 && (
+              <motion.div 
+                key="step3"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
@@ -138,11 +398,11 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
                 </div>
 
                 <div className="flex gap-4">
-                  <button onClick={() => setStep(1)} className="px-12 py-5 border border-brand-charcoal/10 text-brand-charcoal rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-charcoal hover:text-white transition-all">
+                  <button onClick={() => setStep(2)} className="px-12 py-5 border border-brand-charcoal/10 text-brand-charcoal rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-charcoal hover:text-white transition-all">
                     Back
                   </button>
                   <button 
-                    onClick={() => setStep(3)}
+                    onClick={() => setStep(4)}
                     className="flex-grow md:flex-none md:px-12 py-5 bg-brand-charcoal text-white rounded-xl text-[10px] uppercase tracking-widest font-black hover:bg-brand-rose transition-all"
                   >
                     Confirm Order Review
@@ -151,9 +411,9 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
               </motion.div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <motion.div 
-                key="step3"
+                key="step4"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
@@ -171,7 +431,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
                     {isProcessing ? 'Processing Masterpiece...' : 'Pay & Complete Reservation'}
                   </button>
                 </div>
-                <button onClick={() => setStep(2)} className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40 hover:text-brand-charcoal transition-colors mx-auto block">
+                <button onClick={() => setStep(3)} className="text-[10px] uppercase tracking-widest font-black text-brand-charcoal/40 hover:text-brand-charcoal transition-colors mx-auto block">
                   Modify Payment Method
                 </button>
               </motion.div>
@@ -205,10 +465,6 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, clearCart }) => {
               <div className="flex justify-between text-xs italic text-brand-charcoal/60">
                 <span>Subtotal</span>
                 <span>₦{subtotal.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between text-xs italic text-brand-charcoal/60">
-                <span>Tailored Delivery</span>
-                <span>₦{delivery.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-end pt-4">
                 <span className="text-[10px] uppercase tracking-widest font-black">Total</span>
